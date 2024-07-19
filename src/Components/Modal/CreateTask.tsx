@@ -145,7 +145,7 @@ export default function CreateTask({}: Props) {
                 title="Create Task"
                 centered
                 open={visible}
-                style={{ maxHeight: '80vh', overflowY: 'auto' }}
+                style={{ maxHeight: '100vh', overflowY: 'auto' }}
                 onCancel={()=>{
                     const actionClose = closeModalAction(false);
                     dispatch(actionClose)

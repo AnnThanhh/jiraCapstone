@@ -22,6 +22,7 @@ import { DeleteOutlined, FormOutlined } from "@ant-design/icons";
 type Props = {};
 
 export default function UserList({}: Props) {
+  const currentUserId = useSelector((state: RootState) => state.userLoginReducer.userLogin?.id);
   const userSearched: Member[] = useSelector(
     (state: RootState) => state.userReducer.userSearched
   );
@@ -122,6 +123,8 @@ export default function UserList({}: Props) {
       key: "",
       width: 150,
       render(value, record, index) {
+        const isCurrentUser = record.userId === currentUserId;
+  
         return (
           <div style={{ display: "flex" }} key={index}>
             <div>
@@ -143,104 +146,113 @@ export default function UserList({}: Props) {
                 <FormOutlined style={{ fontSize: 18 }} />
               </span>
             </div>
-            <div>
-              <span>
-                <Popconfirm
-                  title="Are you sure to delete this user?"
-                  onConfirm={() => {
-                    const action = deleteUserApi(record.userId);
-                    dispatch(action);
-                  }}
-                  okText="Yes"
-                  cancelText="No"
-                >
-                  <span
-                    className="bg-danger text-white ms-2"
-                    style={{
-                      padding: 6,
-                      borderRadius: "3px",
-                      paddingBottom: 8,
-                      cursor: "pointer",
+            {!isCurrentUser && (
+              <div>
+                <span>
+                  <Popconfirm
+                    title="Are you sure to delete this user?"
+                    onConfirm={() => {
+                      const action = deleteUserApi(record.userId);
+                      dispatch(action);
                     }}
+                    okText="Yes"
+                    cancelText="No"
                   >
-                    <DeleteOutlined style={{ fontSize: 18 }} />
-                  </span>
-                </Popconfirm>
-              </span>
-            </div>
+                    <span
+                      className="bg-danger text-white ms-2"
+                      style={{
+                        padding: 6,
+                        borderRadius: "3px",
+                        paddingBottom: 8,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <DeleteOutlined style={{ fontSize: 18 }} />
+                    </span>
+                  </Popconfirm>
+                </span>
+              </div>
+            )}
           </div>
         );
       },
     },
   ];
 
-  const renderItem = (item: any) => (
-    <List.Item className="mb-4">
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ flex: "1" }}>
-          <div>
-            <strong className="strong">Name:</strong>
-            <span>{item.name}</span>
-          </div>
-          <div>
-            <strong className="strong">User Id:</strong>
-            <span>{item.userId}</span>
-          </div>
-          <div>
-            <strong className="strong">Email:</strong>
-            <span>{item.email}</span>
-          </div>
-          <div>
-            <strong className="strong">Phone number:</strong>
-            <span>{item.phoneNumber}</span>
-          </div>
-          <div className="mt-3">
-            <strong className="strong">Actions:</strong>
-            <span
-              className="bg-primary text-white"
-              style={{
-                padding: 6,
-                borderRadius: "3px",
-                paddingBottom: 8,
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                const actionOpen = openModalEditUser(true);
-                dispatch(actionOpen);
-                const action = getUserEditAction(item);
-                dispatch(action);
-              }}
-            >
-              <FormOutlined style={{ fontSize: 18 }} />
-            </span>
-            <span>
-              <Popconfirm
-                title="Are you sure to delete this user?"
-                onConfirm={() => {
-                  const action = deleteUserApi(item.userId);
+  const renderItem = (item: any) => {
+    const isCurrentUser = item.userId === currentUserId;
+  
+    return (
+      <List.Item className="mb-4">
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div style={{ flex: "1" }}>
+            <div>
+              <strong className="strong">Name:</strong>
+              <span>{item.name}</span>
+            </div>
+            <div>
+              <strong className="strong">User Id:</strong>
+              <span>{item.userId}</span>
+            </div>
+            <div>
+              <strong className="strong">Email:</strong>
+              <span>{item.email}</span>
+            </div>
+            <div>
+              <strong className="strong">Phone number:</strong>
+              <span>{item.phoneNumber}</span>
+            </div>
+            <div className="mt-3">
+              <strong className="strong">Actions:</strong>
+              <span
+                className="bg-primary text-white"
+                style={{
+                  padding: 6,
+                  borderRadius: "3px",
+                  paddingBottom: 8,
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  const actionOpen = openModalEditUser(true);
+                  dispatch(actionOpen);
+                  const action = getUserEditAction(item);
                   dispatch(action);
                 }}
-                okText="Yes"
-                cancelText="No"
               >
-                <span
-                  className="bg-danger text-white ms-2"
-                  style={{
-                    padding: 6,
-                    borderRadius: "3px",
-                    paddingBottom: 8,
-                    cursor: "pointer",
-                  }}
-                >
-                  <DeleteOutlined style={{ fontSize: 18 }} />
+                <FormOutlined style={{ fontSize: 18 }} />
+              </span>
+              {!isCurrentUser && (
+                <span>
+                  <Popconfirm
+                    title="Are you sure to delete this user?"
+                    onConfirm={() => {
+                      const action = deleteUserApi(item.userId);
+                      dispatch(action);
+                    }}
+                    okText="Yes"
+                    cancelText="No"
+                  >
+                    <span
+                      className="bg-danger text-white ms-2"
+                      style={{
+                        padding: 6,
+                        borderRadius: "3px",
+                        paddingBottom: 8,
+                        cursor: "pointer",
+                      }}
+                    >
+                      <DeleteOutlined style={{ fontSize: 18 }} />
+                    </span>
+                  </Popconfirm>
                 </span>
-              </Popconfirm>
-            </span>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </List.Item>
-  );
+      </List.Item>
+    );
+  };
+  
 
   return (
     <>
