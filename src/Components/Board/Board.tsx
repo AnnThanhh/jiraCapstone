@@ -31,10 +31,10 @@ export default function Board({}: Props) {
   const { isFrag } = useSelector(
     (state: RootState) => state.editProjectReducer
   );
-
+  
   // Khởi tạo dispatch
   const dispatch: DispatchType = useDispatch();
-
+  
   // Lấy thông tin tham số từ URL
   const params = useParams();
 
@@ -65,7 +65,7 @@ export default function Board({}: Props) {
     if (!result.destination) {
       return;
     }
-
+    
     // Nếu vị trí nguồn và đích giống nhau, kết thúc hàm
     if (
       source.index === destination.index &&
@@ -101,7 +101,7 @@ export default function Board({}: Props) {
                   style={{ marginBottom: "20px" }}
                 >
                   <Droppable droppableId={taskListDetail.statusId} key={index}>
-                    {(provided) => {
+                    {(provided:any) => {
                       return (
                         <div
                           ref={provided.innerRef}
@@ -128,7 +128,7 @@ export default function Board({}: Props) {
                                   index={index}
                                   draggableId={task.taskId.toString()}
                                 >
-                                  {(provided) => {
+                                  {(provided: any) => {
                                     return (
                                       <li
                                         ref={provided.innerRef}
@@ -269,7 +269,7 @@ export default function Board({}: Props) {
       </DragDropContext>
     );
   };
-
+  
   // Render thành phần Board
   return (
     <div>
@@ -281,7 +281,7 @@ export default function Board({}: Props) {
           <Avatar.Group
             max={{
               count: 4,
-              style: { color: "#f56a00", backgroundColor: "#fde3cf" },
+              style: { color: "#f56a00", backgroundColor: "#fde3cf" }, 
             }}
             size="large"
           >
