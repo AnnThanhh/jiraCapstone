@@ -73,7 +73,7 @@ export default function EditUser({}: Props) {
             <Input />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="passWord"
             label="Password"
             rules={[
@@ -82,7 +82,7 @@ export default function EditUser({}: Props) {
             ]}
           >
             <Input.Password />
-          </Form.Item>
+          </Form.Item> */}
 
           <Form.Item  className="mt-5">
             <Button type="primary" htmlType="submit">
