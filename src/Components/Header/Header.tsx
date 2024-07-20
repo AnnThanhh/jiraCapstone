@@ -115,23 +115,13 @@ export default function Header({ title }: Props) {
           <div className="mobile-menu-items">
             <ul className="nav-menu">
               <li className="menu-item-has-children">
-                <NavLink to="/project">Quản lý dự án</NavLink>
+                <NavLink to="/project">Project Management</NavLink>
               </li>
               <li>
-                <NavLink to="/usermanagement">Quản lý người dùng</NavLink>
+                <NavLink to="/usermanagement">User Management</NavLink>
               </li>
               <li className="menu-item-has-children">
-                <NavLink to="/createproject">Tạo dự án mới</NavLink>
-              </li>
-              <li className="menu-item-has-children">
-                <span
-                  onClick={() => {
-                    const actionOpen = openModalAction(true);
-                    dispatch(actionOpen);
-                  }}
-                >
-                  Tạo công việc
-                </span>
+                <NavLink to="/createproject">Create Project</NavLink>
               </li>
             </ul>
           </div>
