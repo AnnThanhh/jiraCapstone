@@ -32,10 +32,8 @@ export default function Board({}: Props) {
     (state: RootState) => state.editProjectReducer
   );
   
-  // Khởi tạo dispatch
   const dispatch: DispatchType = useDispatch();
   
-  // Lấy thông tin tham số từ URL
   const params = useParams();
 
   // Hàm lấy chi tiết dự án

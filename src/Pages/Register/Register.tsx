@@ -90,6 +90,7 @@ export default function Register({}: Props) {
             rules={[
               { required: true, message: "Please input your password!" },
               { min: 8, message: "Password must be at least 8 characters!" },
+              { pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)/, message: 'Password must include at least one uppercase letter, one lowercase letter, and one number!' }
             ]}
           >
             <Input.Password prefix={<LockOutlined className="site-form-item-icon" />}/>
