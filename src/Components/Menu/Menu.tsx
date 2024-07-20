@@ -16,7 +16,7 @@ export default function Menu({}: Props) {
           </div>
           <div className="account-info">
             <p style={{ color: "rgb(66, 82, 110)", fontWeight: "bold" }}>
-              Jira by AnThanh
+              Jira clone
             </p>
             <p style={{ color: "rgb(94, 108, 132)" }}>Software Project</p>
           </div>
